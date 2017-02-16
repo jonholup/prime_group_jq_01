@@ -1,25 +1,50 @@
-console.log('yo');
+//current list of desired fruit[apple, orange, banana, pear, starfruit];
+var currentPrice = 3.0;
+var averagePrice = currentPrice;
+var newPrice = setInterval(priceAdjuster, 5000); //every 15 seconds
+var inventoryCount = 0;
+
 $(document).ready(function(){
 
-$('.buyButton').on('click', $(this).data('fruit'), function(){
- console.log('The ' + $(this).data('fruit') + ' fruit was clicked.' );
-});
+	//this is where our event listener is - buy button
+	$('.buyButton').on('click', $(this).data('fruit'), function(){
+		console.log('The ' + $(this).data('fruit') + ' fruit was clicked.' );
+		averagePrice = (averagePrice + currentPrice) / 2;
+		averagePrice = averagePrice.toFixed(2);
+		averagePrice = Number(averagePrice);
+		console.log('average price:' , averagePrice);
+		inventoryCount ++;
+		console.log('inventory count' , inventoryCount);
+		return averagePrice;
+	});
+
+
+
+
+// varables
 
 
 
 
 });
- var currentPrice =3.0
 
-//every 15 seconds
+
 
 //do we go up or down:
-if(randomNumber(0,1) == 0) {
-	currentPrice +=(randomNumber(1 , 50) * .01);
-} else {
-	currentPrice -=(randomNumber(1 , 50) * .01);
+function priceAdjuster(){
+	if(randomNumber(0,1) == 0) {
+		currentPrice += (randomNumber(1 , 50) * .01);
+		currentPrice = currentPrice.toFixed(2);
+		currentPrice = Number(currentPrice);
+		console.log(currentPrice);
+	} else {
+		currentPrice -= (randomNumber(1 , 50) * .01);
+		currentPrice = currentPrice.toFixed(2);
+		currentPrice = Number(currentPrice);
+		console.log(currentPrice);
+	}
+	return currentPrice;
 }
-console.log(currentPrice);
 
 
 //now we check if this new price is above the max, or below the min
