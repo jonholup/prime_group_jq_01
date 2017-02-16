@@ -6,24 +6,28 @@ function AddFruit (name, inventoryCount, currentPrice, averagePrice){
 	this.averagePrice = averagePrice;
 }
 
-var apple = new AddFruit ('apple', 0, 5, 5 );
-var orange = new AddFruit ('orange', 0, 3, 3 );
-var banana = new AddFruit ('banana', 0, 1, 1 );
-var pear = new AddFruit ('pear', 0, 6, 6 );
-var starfruit = new AddFruit ('starfruit', 0, 9, 9 );
+var apple = new AddFruit ('Apple', 0, 5, 5 );
+var orange = new AddFruit ('Orange', 0, 3, 3 );
+var banana = new AddFruit ('Banana', 0, 1, 1 );
+var pear = new AddFruit ('Pear', 0, 6, 6 );
+
 
 // var currentPrice = 5;
 // var averagePrice = currentPrice;
 // var newPrice = setInterval(priceAdjuster, 4000); //every 15 seconds
 // var inventoryCount = 0;
-var fruitBowl = [apple, orange, banana, pear, starfruit];
+var fruitBowl = [apple, orange, banana, pear];
 console.log(fruitBowl);
 
 $(document).ready(function(){
 //
 //  writing values for each fruit's current price and inventory
 fruitBowl.forEach(function(fruit){
-	$('#tableHead').append('<th>' + fruit.name + '</th>')
+	$('#tableHead').append('<th>' + fruit.name + '</th>');
+	$('#currentPriceRow').append('<td>$' + fruit.currentPrice + '</td>');
+	$('#buyButtonRow').append('<td><button class="buyButton" data-fruit="'+ fruit.name +'">Buy</button></td>');
+	$('#averagePriceRow').append('<td>$' + fruit.averagePrice + '</td>');
+	$('#inventoryCountRow').append('<td>' + fruit.inventoryCount + '</td>');
 });
 // $('#currentApplePrice').text('apple.currentPrice');
 
@@ -31,13 +35,15 @@ fruitBowl.forEach(function(fruit){
 	//this is where our event listener is - buy button
 	$('.buyButton').on('click', $(this).data('fruit'), function(){
 		console.log('The ' + $(this).data('fruit') + ' fruit was clicked.' );
-		$(this).averagePrice = ($(this).averagePrice + $(this).currentPrice) / 2;
-		$(this).averagePrice = $(this).averagePrice.toFixed(2);
-		$(this).averagePrice = Number($(this).averagePrice);
-		console.log('average price:' , $(this).averagePrice);
+		var clickedAveragePrice = ($(this).averagePrice + $(this).currentPrice) / 2;
+		clickedAveragePrice = clickedAveragePrice.toFixed(2);
+		clickedAveragePrice = Number(clickedAveragePrice);
+		console.log('average price:' , clickedAveragePrice);
 		$(this).inventoryCount ++;
 		console.log('inventory count' , $(this).inventoryCount);
-		return $(this).averagePrice;
+
+		return clickedAveragePrice;
+
 	});
 
 });
