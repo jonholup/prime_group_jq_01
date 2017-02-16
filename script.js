@@ -1,6 +1,9 @@
 console.log('yo');
 $(document).ready(function(){
 
+$('.buyButton').on('click', $(this).data('fruit'), function(){
+ console.log('The ' + $(this).data('fruit') + ' fruit was clicked.' );
+});
 
 
 
